@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author rhuan
  */
-public class Usuario implements Serializable {
+public class Usuarios implements Serializable {
 
     private Integer cdUsuario;
     private String nome;
@@ -22,10 +22,10 @@ public class Usuario implements Serializable {
     private String estado;
     private String cep;
 
-    public Usuario() {
+    public Usuarios() {
     }
 
-    public Usuario(Integer cdUsuario, String nome, String login, String senha, String logradouro, String cidade, String estado, String cep) {
+    public Usuarios(Integer cdUsuario, String nome, String login, String senha, String logradouro, String cidade, String estado, String cep) {
         this.cdUsuario = cdUsuario;
         this.nome = nome;
         this.login = login;

@@ -85,24 +85,26 @@ public class AcademicoDaoImpl implements Serializable {
                 ConexaoMysql.fecharConexao(conexao, preparando);
             }
         }
+//Academico(Integer cdMatricula, String nmAcademico, int cpf, String dsEmail, String dsEndereco, int idSexo, int idade)
 
         public Academico pesquisarPorId(Integer id) throws SQLException {
             Academico academico = null;
-            String consulta = "SELECT * FROM academico WHERE 
+            String consulta = "SELECT * FROM academico WHERE cdMatricula = ?";
 
             try {
-                conexao = FabricaConexao.abrirConexao();
+                conexao = ConexaoMysql.abrirConexao();
                 preparando = conexao.prepareStatement(consulta);
                 preparando.setInt(1, id);
                 resultSet = preparando.executeQuery();
                 if (resultSet.next()) {
-                    funcionario = new Funcionario();
-                    funcionario.setId(id);
-                    funcionario.setNome(resultSet.getString("nome"));
-                    funcionario.setEmail(resultSet.getString("email"));
-                    funcionario.setTelefone(resultSet.getString("telefone"));
-                    funcionario.setNumeroCracha(resultSet.getString("numeroCracha"));
-
+                    academico = new Academico();
+                    academico.setCdMatricula(id);
+                    academico.setNmAcademico(resultSet.getString("nmAcademico"));
+                    academico.setCpf(resultSet.getInt("cpf"));
+                    academico.setDsEmail(resultSet.getString("dsEmail"));
+                    academico.setDsEmail(resultSet.getString("dsEndereco"));
+                    academico.setIdSexo(resultSet.getInt("idSexo"));
+                    academico.setIdade(resultSet.getInt("idade"));
                 }
 
             } catch (SQLException e) {
@@ -111,6 +113,7 @@ public class AcademicoDaoImpl implements Serializable {
                 ConexaoMysql.fecharConexao(conexao, preparando, resultSet);
             }
 
-            return funcionario;
+            return academico;
         }
     }
+}
